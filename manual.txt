@@ -1,6 +1,6 @@
 
 
-Инструкий
+Инструкция
 
 =====================================================================
 
@@ -96,6 +96,42 @@ add-apt-repository universe
 apt update / проверяем доступные обновления
 apt upgrade / обновляем
 apt install build-essential module-assistant 
+m-a prepare
+blkid
+cd /media
+mkdir cdrom
+mount /dev/sr0 cdrom
+cd cdrom
+./VBoxLinuxAdditions.run
+reboot
+Проверка общих файлов после перезагрузки
+ctrl+R / Реконнект
+
+====================================================================
+Установка и настройка Nginx, PHP, MySQL и прочих инструментов для удобной работы 
+
+apt install nginx 
+Проверяем web-server - заходим из винды любым браузером по IP виртуалки (ifconfig). Должно быть Welcome to nginx!
+apt install php7.2-fpm
+apt install php7.2-bcmath / математическая библиотека 
+apt install php7.2-curl
+apt install php7.2-intl
+apt install php7.2-mbstring
+apt install php7.2-pgsql
+apt install php7.2-xml
+apt install php7.2-zip
+
+apt install mc
+apt install htop
+
+### Установка Composer	-	https://getcomposer.org/download/
+cd ~
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/local/bin/composer
+composer self-update
 
 
 
