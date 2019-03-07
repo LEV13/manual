@@ -1,4 +1,4 @@
-﻿Инструкция
+Инструкция
 
 =====================================================================
 
@@ -22,7 +22,7 @@
 	Тип: Linux
 	Версия: Ubuntu (64-bit)
 Нажимаем “Далее”
-	Объем оперативной памяти указываем в зависимости от количества RAM, по умолчанию выставляем 2048 МБ.
+	Объем оперативной памяти указываем в зависимости от количества RAM, по умолчанию выставляем 2048 МБ / 4096 МБ .
 Нажимаем “Далее”
 	Выбираем пункт: Создать новый виртуальный жесткий диск
 Нажимаем “Создать”
@@ -105,6 +105,8 @@ reboot
 Проверка общих файлов после перезагрузки
 ctrl+R / Реконнект
 
+mount -t vboxsf neirika /var/www  	/ подключаем папку
+
 ====================================================================
 Установка и настройка Nginx, PHP, MySQL и прочих инструментов для удобной работы 
 
@@ -113,11 +115,13 @@ apt install nginx
 apt install php7.2-fpm
 apt install php7.2-bcmath / математическая библиотека 
 apt install php7.2-curl
-apt install php7.2-intl
+apt install php7.2-intl	
 apt install php7.2-mbstring
 apt install php7.2-pgsql
 apt install php7.2-xml
 apt install php7.2-zip
+apt install php7.2-bz2
+apt install php7.2-gd
 
 apt install mc
 apt install htop
@@ -131,7 +135,76 @@ php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer
 composer self-update
 
+====================================================================
 
+ssh-keygen // Получение SSH key
+cd /root/.ssh
+cat id_rsa.pub // Копируем key в https://bitbucket.svyaz.me/plugins/servlet/ssh/account/keys
+git clone //
+git fetch
+git chekout development 
+composer install
+
+// Настройка nginx
+api
+backend
+cabin
+ext_api
+
+====================================================================
+etc/nginx
+
+// Пример файла
+
+server {
+    charset utf-8;
+    client_max_body_size 128M;
+
+    listen 80;
+
+    server_name backend.local;
+    root        /var/www/vpbxa/backend/web;
+    index       index.php;
+
+    sendfile off;
+
+    access_log  /var/log/nginx/backend.local.log;
+    error_log   /var/log/nginx/backend.local.log;
+
+    location / {
+        # Redirect everything that isn't a real file to index.php
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~* \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+        try_files $uri =404;
+        access_log   off;
+        expires      7d;
+        etag on;
+    }
+    error_page 404 /404.html;
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(ht|svn|git) {
+        deny all;
+    }
+
+}
+
+
+====================================================================
+
+Создать ссылку на файл в mc
+Ctrl + x s	создать абсолютную символическую ссылку
+Ctrl + u	поменять панели местамиmc
+Esc i       дублировать окно
 
 
 
