@@ -7,7 +7,7 @@
 - [VirtualBox](https://www.virtualbox.org/)
 - [MobaXterm](https://mobaxterm.mobatek.net/download.html)
 
-**Потребуются редакторы**
+**Редакторы кода**
 - [PhpStorm](https://www.jetbrains.com/phpstorm/) - основной редактор для работы с PHP
 - [Notepad++](https://notepad-plus-plus.org/) или [Sublime Text](https://www.sublimetext.com/)
 
