@@ -208,6 +208,14 @@ Esc i       дублировать окно
 
 
 
+====================================================================
+Если 404
+
+usermod -a -G vboxsf www-data
+service nginx restart
+service php7.2-fpm restart
+
+
 
 
 
